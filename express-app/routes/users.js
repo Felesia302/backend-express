@@ -24,8 +24,13 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   const userId = parseInt(req.params.id);
-  const user = users.find(u => u.id === userId);
-  res.json(user);
+  db.get(`SELECT id, name FROM users WHERE id = ${userId}`, [], (err, rows) => {
+      if (err) {
+         console.log(err);
+      } else {
+         res.json({ items: users });
+      }
+   });
 });
 
 router.post('/', function(req, res, next) {
@@ -33,7 +38,7 @@ router.post('/', function(req, res, next) {
 
   const insert = "INSERT INTO users (name) VALUES (?)";
   db.run(insert, [name]);
-  
+
   console.log(name)
   
   const newUser = {
