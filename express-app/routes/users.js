@@ -10,6 +10,12 @@ router.get('/', function(req, res, next) {
   res.json({ items: users });
 });
 
+router.get('/:id', function(req, res, next) {
+  const userId = parseInt(req.params.id);
+  const user = users.find(u => u.id === userId);
+  res.json(user);
+});
+
 router.post('/', function(req, res, next) {
   const { name } = req.body;
   
