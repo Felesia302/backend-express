@@ -27,9 +27,6 @@ router.get('/:id', function(req, res, next) {
   db.get("SELECT id, name FROM users WHERE id = ?", [userId], (err, row) => {
     if (err) {
       console.log(err);
-      res.status(500).json({ error: 'Ошибка при получении пользователя' });
-    } else if (!row) {
-      res.status(404).json({ error: 'Пользователь не найден' });
     } else {
       res.json(row);
     }
