@@ -18,9 +18,11 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   const { name } = req.body;
+
+  console.log(name)
   
   const newUser = {
-    id: users.length + 1, // Простая генерация ID
+    id: users.length + 1, 
     name: name
   };
   

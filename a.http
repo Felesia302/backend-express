@@ -1,11 +1,10 @@
-﻿### 
-GET http://localhost:3000/users
-
+﻿GET http://localhost:3000/users
 ###
-
-POST http://localhost:3000/users
+GET http://localhost:3000/users?auth=true
+###
+POST http://localhost:3000/users?auth=true
 Content-Type: application/json
 
 {
-  "name": "Иван"
+  "name": "Тимофей Шинкаренко"
 }
