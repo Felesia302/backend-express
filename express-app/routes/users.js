@@ -24,13 +24,16 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   const userId = parseInt(req.params.id);
-  db.get(`SELECT id, name FROM users WHERE id = ${userId}`, [], (err, rows) => {
-      if (err) {
-         console.log(err);
-      } else {
-         res.json({ items: users });
-      }
-   });
+  db.get("SELECT id, name FROM users WHERE id = ?", [userId], (err, row) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ error: 'Ошибка при получении пользователя' });
+    } else if (!row) {
+      res.status(404).json({ error: 'Пользователь не найден' });
+    } else {
+      res.json(row);
+    }
+  });
 });
 
 router.post('/', function(req, res, next) {
