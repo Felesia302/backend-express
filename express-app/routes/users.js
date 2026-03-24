@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('Hello, world!');
+  const usersResponse = {
+    items: [
+      { id: 1, name: "Чекашева Юля" },
+      { id: 2, name: "Никита Тюлькин" }
+    ]
+  };
+  
+  res.json(usersResponse);
 });
 
 module.exports = router;
