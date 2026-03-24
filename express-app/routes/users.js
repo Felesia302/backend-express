@@ -1,15 +1,26 @@
 const express = require('express');
 const router = express.Router();
 
+let users = [
+  { id: 1, name: "Чекашева Юля" },
+  { id: 2, name: "Никита Тюлькин" }
+];
+
 router.get('/', function(req, res, next) {
-  const usersResponse = {
-    items: [
-      { id: 1, name: "Чекашева Юля" },
-      { id: 2, name: "Никита Тюлькин" }
-    ]
+  res.json({ items: users });
+});
+
+router.post('/', function(req, res, next) {
+  const { name } = req.body;
+  
+  const newUser = {
+    id: users.length + 1, // Простая генерация ID
+    name: name
   };
   
-  res.json(usersResponse);
+  users.push(newUser);
+  
+  res.status(201).json(newUser);
 });
 
 module.exports = router;
